@@ -21,13 +21,13 @@ def scrape_and_store_completed(date_from: str = None, date_to: str = None) -> di
 
     Returns a small summary dict for logging / the Streamlit "scrape now" panel.
     """
-     db.init_db()
+    db.init_db()
     if date_from is None:
         date_from, date_to = scraper.last_n_days_range(8)
     if date_to is None:
         date_to = datetime.utcnow().strftime("%Y-%m-%d")
     date_from = max(date_from, config.SEASON_START_DATE)
-    
+
     session = scraper._session()
     discovered = scraper.discover_matches(date_from, date_to, session=session)
     completed = discovered[discovered.status == "completed"]
