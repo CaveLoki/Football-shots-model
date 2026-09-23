@@ -107,6 +107,8 @@ def _extract_commented_tables(html: str) -> BeautifulSoup:
 # ---------------------------------------------------------------------------
 
 def discover_matches(date_from: str, date_to: str, session: requests.Session = None) -> pd.DataFrame:
+    if date_to is None:
+        date_to = datetime.utcnow().strftime("%Y-%m-%d")
     """
     Walk /en/matches/{date} for every day in [date_from, date_to] and return
     a DataFrame of matches in our target competitions, with columns:
@@ -116,6 +118,7 @@ def discover_matches(date_from: str, date_to: str, session: requests.Session = N
     One request per calendar day, regardless of how many of our 8
     competitions play that day.
     """
+  
     session = session or _session()
     d0 = datetime.strptime(date_from, "%Y-%m-%d")
     d1 = datetime.strptime(date_to, "%Y-%m-%d")
