@@ -1,0 +1,14 @@
+# Raw HTML cache — large, regenerable, must not be committed
+data/html_cache/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# OS
+.DS_Store
